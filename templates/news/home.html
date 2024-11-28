@@ -1,0 +1,173 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+    <section id="sliderSection">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="slick_slider">
+                    {% for news in news_list %}
+
+                    <div class="single_iteam">
+                        <a href="{% url 'news_detail_page' news.pk %}">
+                            <img src="{{ news.image.url }}" alt="">
+                        </a>
+                        <div class="slider_article">
+                            <h2><a class="slider_tittle" href="{% url 'news_detail_page' news.pk %}">{{ news.title}}</a></h2>
+                            <p>{{ news.title }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="latest_post">
+                    <h2><span>Latest post</span></h2>
+                    <div class="latest_post_container">
+                        <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+                        <ul class="latest_postnav">
+                            {% for news in news_list %}
+                            <li>
+                                <div class="media">
+                                    <a href="{% url 'news_detail_page' news.pk %}" class="media-left">
+                                        <img alt="" src="{{ news.image.url }}">
+                                    </a>
+                                    <div class="media-body">
+                                        <a href="{% url 'news_detail_page' news.pk %}" class="catg_title"> {{ news.title }}</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contentSection">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="left_content">
+                    <div class="single_post_content">
+                        <h2><span>Sport</span></h2>
+                        <div class="single_post_content_left">
+                            <figure class="bsbig_fig">
+                                <a href="{% url 'news_detail_page' last_one.pk %}" class="featured_img">
+                                    <img alt="" src="{{ last_one.image.url }}">
+                                    <span class="overlay"></span>
+                                </a>
+                                <figcaption>
+                                    <a href="{% url 'news_detail_page' last_one.pk%}">{{ last_one.title }}</a>
+                                </figcaption>
+                                <p>{{ last_one.body }}</p>
+                            </figure>
+                        </div>
+
+                        <div class="single_post_content_right">
+                            <ul class="spost_nav">
+                                {% for news in sport_news %}
+                                <li>
+                                    <div class="media wow fadeInDown">
+                                        <a href="{% url 'news_detail_page' news.pk %}" class="media-left">
+                                            <img alt="" src="{{ news.image.url }}">
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="pages/single_page.html" class="catg_title"> {{ news.body }}</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="fashion_technology_area">
+                        <div class="fashion">
+                            <div class="single_post_content">
+                                <h2><span>Politics</span></h2>
+                                <ul class="business_catgnav wow fadeInDown">
+                                    {% for news in political_news %}
+                                        {% if forloop.first %}
+                                    <li>
+                                        <figure class="bsbig_fig">
+                                            <a href="{% url 'news_detail_page' news.pk%} " class="featured_img">
+                                                <img alt="" src="{{ news.image.url }}">
+                                                <span class="overlay"></span>
+                                            </a>
+                                            <figcaption> <a href="{% url 'news_detail_page' news.pk%}">{{ news.title }}</a> </figcaption>
+                                            <p>{{ news.body | truncatewords:10}}</p>
+                                        </figure>
+                                    </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                <ul class="spost_nav">
+                                    {% for news in political_news %}
+                                    	{% if forloop.counter > 1%}
+                                    
+                                    <li>
+                                        <div class="media wow fadeInDown">
+                                            <a href="{% url 'news_detail_page' news.pk%}" class="media-left">
+                                                <img alt="" src="{{ news.image.url }}">
+                                            </a>
+                                            <div class="media-body">
+                                                <a href="{% url 'news_detail_page' news.pk%}" class="catg_title"> {{ news.title }}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="technology">
+                            <div class="single_post_content">
+                                <h2><span>Technology</span></h2>
+                                <ul class="business_catgnav">
+                                    {% for news in technological_news %}
+                                    	{% if forloop.first %}
+                                    		
+                                    <li>
+                                        <figure class="bsbig_fig wow fadeInDown">
+                                            <a href="{% url 'news_detail_page' news.pk%}" class="featured_img">
+                                                <img alt="" src="{{ news.image.url }}">
+                                                <span class="overlay"></span>
+                                            </a>
+                                            <figcaption> <a href="{% url 'news_detail_page' news.pk%}">{{ news.title }}</a> </figcaption>
+                                            <p>{{ news.body | truncatewords:10}}</p>
+                                        </figure>
+                                    </li>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                <ul class="spost_nav">
+                                    {% for news in technological_news %}
+                                    	{% if forloop.counter > 1  %}
+                                            
+                                    <li>
+                                        <div class="media wow fadeInDown">
+                                            <a href="{% url 'news_detail_page' news.pk%}" class="media-left">
+                                                <img alt="" src="{{ news.image.url }}">
+                                            </a>
+                                            <div class="media-body">
+                                                <a href="{% url 'news_detail_page' news.pk%}" class="catg_title"> {{ news.title }}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+{% endblock content%}

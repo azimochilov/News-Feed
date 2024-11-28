@@ -1,0 +1,25 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}
+    Search Results
+{% endblock title %}
+
+{% block content %}
+    <h2>Search results</h2>
+
+    {% for all_result_new in all_result_news %}
+        <div class="news-item">
+            <!-- News Item -->
+            <div class="news-image">
+                <img src="{{ all_result_new.image.url }}" alt="{{ all_result_new.title }}" class="img-fluid" width="25%" height="25%">
+            </div>
+            <div class="news-content">
+                <!-- Corrected URL for News Detail -->
+                <h3><a href="{% url 'news_detail_page' all_result_new.id %}">{{ all_result_new.title }}</a></h3>
+                <p class="news-summary">{{ all_result_new.summary }}</p>
+                <a href="{% url 'news_detail_page' all_result_new.id %}" class="read-more">Read More</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

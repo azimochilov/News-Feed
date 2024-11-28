@@ -1,0 +1,18 @@
+<head>
+<title>
+News List
+</title>
+</head>
+
+<body>
+<h1>Cr7 is the best</h1>
+
+{% for news in news_list %}
+    <a href="{% url 'news_detail_page' news.pk %}">
+        <l1>{{ news.title }}</l1>
+    </a>
+	
+{% endfor %}
+
+<endfor></endfor>
+</body>

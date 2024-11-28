@@ -1,0 +1,81 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}
+    Admin Page
+{% endblock title %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h3 {
+            color: #d291bc; /* Soft pink tone */
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #d291bc; /* Soft pink header */
+            color: #fff; /* White text for contrast */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #fbeaf6; /* Lighter pink for alternate rows */
+        }
+
+        table tr:hover {
+            background-color: #d291bc; /* Soft pink highlight on hover */
+            color: #fff; /* White text on hover */
+        }
+
+        table td {
+            color: #333; /* Standard text color */
+        }
+    </style>
+
+    <h3>Admin List</h3>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        {% for admin_user in admin_users %}
+            <tr>
+                <td>{{ admin_user.username }}</td>
+                <td>{{ admin_user.first_name }}</td>
+                <td>{{ admin_user.last_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="btn-container">
+        <form method="get" action="{% url 'news_create' %}">
+            <button type="submit" class="btn">Create News</button>
+        </form>
+    </div>
+{% endblock content %}

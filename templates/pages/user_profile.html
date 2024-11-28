@@ -1,0 +1,25 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}
+    User Profile
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h3>Welcome to your profile, {{ user.first_name }} {{ user.last_name }}</h3>
+        <ul class="list-group mt-4">
+            <li><img src="{{ user.profile.photo.url }}" width="25%" height="25%"></li>
+            <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+            <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+            <li class="list-group-item" ><strong><a href="{% url 'password_change' %}" >Password change</a></strong> </li>
+            <li class="list-group-item">
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+{% endblock content %}
